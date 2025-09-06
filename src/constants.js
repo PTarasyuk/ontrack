@@ -12,3 +12,9 @@ export const NAV_ITEMS = {
   [PAGE_ACTIVITIES]: ListBulletIcon,
   [PAGE_PROGRESS]: ChartBarIcon,
 }
+
+export const PERIOD_SELECT_OPTIONS = [
+  { label: '0:15', value: 15 },
+  { label: '0:30', value: 30 },
+  { label: '0:45', value: 45 },
+]
