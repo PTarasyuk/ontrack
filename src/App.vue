@@ -26,10 +26,6 @@ function goTo(page) {
 }
 
 function deleteActivity(activity) {
-  // const index = activities.indexOf(activity)
-  // if (index !== -1) {
-  //   activities.splice(index, 1)
-  // }
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 </script>
