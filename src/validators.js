@@ -45,7 +45,7 @@ export function isNumberOrNull(value) {
 }
 
 function isSelectedOptionValid({ value, label }) {
-  return isNumber(value) && isString(label)
+  return isNumber(value) && isNotEmptyString(label)
 }
 
 function isBetween(value, start, end) {
