@@ -16,11 +16,13 @@ import TheTimeline from './pages/TheTimeline.vue'
 
 const currentPage = ref(normalizePageHash())
 
-const timelineItems = generateTimelineItems()
+const timelineItems = ref(generateTimelineItems())
 
 const activities = ref(generateActivities())
 
-const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value))
+const activitySelectOptions = computed(() =>
+  generateActivitySelectOptions(activities.value),
+)
 
 function goTo(page) {
   currentPage.value = page
@@ -31,7 +33,7 @@ function createActivity(activity) {
 }
 
 function deleteActivity(activity) {
-  timelineItems.forEach((timelineItem) => {
+  timelineItems.value.forEach((timelineItem) => {
     if (timelineItem.activityId === activity.id) {
       timelineItem.activityId = null
     }
@@ -40,7 +42,7 @@ function deleteActivity(activity) {
 }
 
 function setTimelineItemActivity({ timelineItem, activity }) {
-  timelineItem.activityId = activity.id
+  timelineItem.activityId = activity?.id || null
 }
 </script>
 
