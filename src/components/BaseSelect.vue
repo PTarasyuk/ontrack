@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue'
-import { XMarkIcon } from '@heroicons/vue/24/solid'
-import { BUTTON_TYPE_NEUTRAL } from '@/constants'
-import { normalizeSelectValue } from '@/functions'
-import { validateSelectOptions, isUndefinedOrNull, isSelectValueValid } from '@/validators'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+import { BUTTON_TYPE_NEUTRAL } from '../constants'
+import { normalizeSelectValue } from '../functions'
+import { validateSelectOptions, isSelectValueValid, isUndefinedOrNull } from '../validators'
 import BaseButton from './BaseButton.vue'
 
 const props = defineProps({

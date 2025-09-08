@@ -1,4 +1,4 @@
-import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from './constants.js'
+import { BUTTON_TYPES, NAV_ITEMS, HOURS_IN_DAY, MIDNIGHT_HOUR } from './constants'
 
 export function isPageValid(page) {
   return Object.keys(NAV_ITEMS).includes(page)
@@ -25,7 +25,7 @@ export function isActivityValid({ id, name, secondsToComplete }) {
 }
 
 function isNotEmptyString(value) {
-  return isString(value) && value.trim().length > 0
+  return isString(value) && value.length > 0
 }
 
 export function isHourValid(hour) {
@@ -33,7 +33,7 @@ export function isHourValid(hour) {
 }
 
 export function validateSelectOptions(options) {
-  return options.every(isSelectedOptionValid)
+  return options.every(isSelectOptionValid)
 }
 
 export function isUndefinedOrNull(value) {
@@ -49,23 +49,23 @@ export function isNumberOrNull(value) {
 }
 
 export function isUndefined(value) {
-  return typeof value === 'undefined'
+  return value === undefined
 }
 
 export function isNull(value) {
   return value === null
 }
 
-function isSelectedOptionValid({ value, label }) {
+export function isNumber(value) {
+  return typeof value === 'number'
+}
+
+function isSelectOptionValid({ value, label }) {
   return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label)
 }
 
 function isBetween(value, start, end) {
   return value >= start && value <= end
-}
-
-function isNumber(value) {
-  return typeof value === 'number'
 }
 
 function isString(value) {
