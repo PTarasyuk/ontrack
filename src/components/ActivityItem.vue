@@ -18,7 +18,7 @@ const emit = defineEmits({
   delete: isUndefined,
 })
 
-const secondsToCompete = ref(null)
+const secondsToCompete = ref(0)
 </script>
 
 <template>
