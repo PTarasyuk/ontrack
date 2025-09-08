@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 
 import {
-  id,
   generateTimelineItems,
   normalizePageHash,
   generateActivities,
@@ -27,12 +26,8 @@ function goTo(page) {
   currentPage.value = page
 }
 
-function createActivity(name) {
-  activities.value.push({
-    id: id(),
-    name,
-    secondsToComplete: 0,
-  })
+function createActivity(activity) {
+  activities.value.push(activity)
 }
 
 function deleteActivity(activity) {
