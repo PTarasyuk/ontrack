@@ -1,33 +1,21 @@
 <script setup>
-import { isPageValid } from '@/validators'
-import NavItem from './NavItem.vue'
 import { NAV_ITEMS } from '@/constants'
-
-defineProps({
-  currentPage: {
-    required: true,
-    type: String,
-    validator: isPageValid,
-  },
-})
-
-const emit = defineEmits({
-  navigate: isPageValid,
-})
+import { currentPage, navigate } from '@/router'
+import NavItem from './NavItem.vue'
 </script>
 
 <template>
   <nav class="sticky bottom-0 z-10 bg-white">
     <ul class="flex items-center justify-around border-t">
       <NavItem
-        v-for="(navIcon, navItem) in NAV_ITEMS"
-        :key="navItem"
-        :href="`#${navItem}`"
-        :class="{ 'bg-gray-200 pointer-events-none': navItem === currentPage }"
-        @click="emit('navigate', navItem)"
+        v-for="(icon, page) in NAV_ITEMS"
+        :key="page"
+        :href="`#${page}`"
+        :class="{ 'bg-gray-200 pointer-events-none': page === currentPage }"
+        @click="navigate(page)"
       >
-        <component :is="navIcon" class="h-6 w-6" />
-        {{ navItem }}
+        <component :is="icon" class="h-6 w-6" />
+        {{ page }}
       </NavItem>
     </ul>
   </nav>
