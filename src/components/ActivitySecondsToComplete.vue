@@ -1,7 +1,7 @@
 <script setup>
+import { computed, inject } from 'vue'
 import { formatSeconds, getTotalActivitySeconds } from '@/functions'
-import { isActivityValid, validateTimelineItems } from '@/validators'
-import { computed } from 'vue'
+import { isActivityValid } from '@/validators'
 
 const props = defineProps({
   activity: {
@@ -9,12 +9,9 @@ const props = defineProps({
     type: Object,
     validator: isActivityValid,
   },
-  timelineItems: {
-    type: Array,
-    required: true,
-    validator: validateTimelineItems,
-  },
 })
+
+const timelineItems = inject('timelineItems')
 
 const classes = computed(
   () => `flex items-center rounded px-2 font-mono text-xl ${colorClasses.value}`
@@ -30,7 +27,7 @@ const sign = computed(() => (secondsDiff.value >= 0 ? '+' : '-'))
 
 const secondsDiff = computed(
   () =>
-    getTotalActivitySeconds(props.activity, props.timelineItems) - props.activity.secondsToComplete
+    getTotalActivitySeconds(props.activity, timelineItems) - props.activity.secondsToComplete
 )
 </script>
 
