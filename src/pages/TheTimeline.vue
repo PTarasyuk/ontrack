@@ -3,8 +3,6 @@ import {
   isActivityValid,
   isPageValid,
   isTimelineItemValid,
-  validateActivities,
-  validateSelectOptions,
   validateTimelineItems,
 } from '@/validators'
 import TimelineItem from '@/components/TimelineItem.vue'
@@ -16,16 +14,6 @@ const props = defineProps({
     type: Array,
     required: true,
     validator: validateTimelineItems,
-  },
-  activities: {
-    required: true,
-    type: Array,
-    validator: validateActivities,
-  },
-  activitySelectOptions: {
-    required: true,
-    type: Array,
-    validator: validateSelectOptions,
   },
   currentPage: {
     required: true,
@@ -69,8 +57,6 @@ function scrollToHour(hour = null, isSmooth = true) {
         v-for="timelineItem in timelineItems"
         :key="timelineItem.hour"
         :timeline-item="timelineItem"
-        :activities="activities"
-        :activity-select-options="activitySelectOptions"
         ref="timelineItemRefs"
         @select-activity="emit('setTimelineItemActivity', timelineItem, $event)"
         @scroll-to-hour="scrollToHour"
