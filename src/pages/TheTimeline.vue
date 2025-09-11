@@ -1,10 +1,5 @@
 <script setup>
-import {
-  isActivityValid,
-  isPageValid,
-  isTimelineItemValid,
-  validateTimelineItems,
-} from '@/validators'
+import { isPageValid, validateTimelineItems } from '@/validators'
 import TimelineItem from '@/components/TimelineItem.vue'
 import { nextTick, ref, watchPostEffect } from 'vue'
 import { MIDNIGHT_HOUR, PAGE_TIMELINE } from '@/constants'
@@ -19,12 +14,6 @@ const props = defineProps({
     required: true,
     type: String,
     validator: isPageValid,
-  },
-})
-
-const emit = defineEmits({
-  setTimelineItemActivity(timelineItem, activity) {
-    return [isTimelineItemValid(timelineItem), isActivityValid(activity)].every(Boolean)
   },
 })
 
@@ -58,7 +47,6 @@ function scrollToHour(hour = null, isSmooth = true) {
         :key="timelineItem.hour"
         :timeline-item="timelineItem"
         ref="timelineItemRefs"
-        @select-activity="emit('setTimelineItemActivity', timelineItem, $event)"
         @scroll-to-hour="scrollToHour"
       />
     </ul>
