@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import {
   BUTTON_TYPE_DANGER,
   BUTTON_TYPE_WARNING,
@@ -9,7 +10,6 @@ import { formatSeconds } from '@/functions'
 import { isHourValid, isNumber } from '@/validators'
 import { ArrowPathIcon, PauseIcon, PlayIcon } from '@heroicons/vue/24/outline'
 import BaseButton from '@/components/BaseButton.vue'
-import { ref } from 'vue'
 
 const props = defineProps({
   seconds: {
@@ -24,6 +24,10 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits({
+  updateSeconds: isNumber,
+})
+
 const seconds = ref(props.seconds)
 const isRunning = ref(false)
 
@@ -31,17 +35,22 @@ const isStartButtonDisabled = props.hour !== new Date().getHours()
 
 function start() {
   isRunning.value = setInterval(() => {
+    emit('updateSeconds', 1)
     seconds.value++
   }, MILLISECONDS_IN_SECOND)
 }
 
 function stop() {
   clearInterval(isRunning.value)
+
   isRunning.value = false
 }
 
 function reset() {
   stop()
+
+  emit('updateSeconds', -seconds.value)
+
   seconds.value = 0
 }
 </script>
