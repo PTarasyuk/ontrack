@@ -1,8 +1,9 @@
 <script setup>
 import { computed } from 'vue'
-import { BUTTON_TYPE_NEUTRAL } from '../constants'
-import { normalizeSelectValue } from '../functions'
-import { validateSelectOptions, isSelectValueValid, isUndefinedOrNull } from '../validators'
+import { BUTTON_TYPE_NEUTRAL } from '@/constants'
+import { ICON_XMARK } from '@/icons'
+import { normalizeSelectValue } from '@/functions'
+import { validateSelectOptions, isSelectValueValid, isUndefinedOrNull } from '@/validators'
 import BaseButton from './BaseButton.vue'
 import BaseIcon from './BaseIcon.vue'
 
@@ -33,7 +34,7 @@ function select(value) {
 <template>
   <div class="flex gap-2">
     <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="select(null)">
-      <BaseIcon name="XMark" class="h-8" />
+      <BaseIcon :name="ICON_XMARK" class="h-8" />
     </BaseButton>
     <select
       class="w-full truncate rounded bg-gray-100 py-1 px-2 text-2xl"
