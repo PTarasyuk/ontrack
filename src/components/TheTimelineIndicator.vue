@@ -1,16 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-import { HUNDRED_PERCENT, MINUTES_IN_HOUR, SECONDS_IN_DAY, SECONDS_IN_MINUTE } from '@/constants'
+import { computed, ref, watchEffect } from 'vue'
+import {
+  HUNDRED_PERCENT,
+  MILLISECONDS_IN_SECOND,
+  MINUTES_IN_HOUR,
+  SECONDS_IN_DAY,
+  SECONDS_IN_MINUTE,
+} from '@/constants'
+
+const secondsSinceMidnight = ref(calculateSecondsSinceMidnight())
 
 const indicatorRef = ref()
 
-function calculateTopOffset() {
-  return (calculateSecondsSinceMidnightPercentage() * getTimelineHight()) / HUNDRED_PERCENT
-}
+setInterval(() => (secondsSinceMidnight.value += 5 * 60), MILLISECONDS_IN_SECOND)
 
-function calculateSecondsSinceMidnightPercentage() {
-  return (HUNDRED_PERCENT * calculateSecondsSinceMidnight()) / SECONDS_IN_DAY
-}
+const topOffset = computed(
+  () => (secondsSinceMidnightPercentage.value * getTimelineHight()) / HUNDRED_PERCENT
+)
+
+const secondsSinceMidnightPercentage = computed(
+  () => (HUNDRED_PERCENT * secondsSinceMidnight.value) / SECONDS_IN_DAY
+)
+
+watchEffect(() => {
+  if (secondsSinceMidnight.value > SECONDS_IN_DAY) {
+    secondsSinceMidnight.value = 0
+  }
+})
 
 function calculateSecondsSinceMidnight() {
   const now = new Date()
@@ -31,6 +47,6 @@ function getTimelineHight() {
   <hr
     ref="indicatorRef"
     class="pointer-events-none absolute z-10 w-full border-b-2 border-red-600"
-    :style="{ top: `${calculateTopOffset()}px` }"
+    :style="{ top: `${topOffset}px` }"
   />
 </template>
