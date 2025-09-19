@@ -1,12 +1,12 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { HUNDRED_PERCENT } from '@/constants'
-import { secondsSinceMidnightPercentage } from '@/time'
+import { secondsSinceMidnightInPercentage } from '@/time'
 
 const indicatorRef = ref()
 
 const topOffset = computed(
-  () => (secondsSinceMidnightPercentage.value * getTimelineHight()) / HUNDRED_PERCENT
+  () => (secondsSinceMidnightInPercentage.value * getTimelineHight()) / HUNDRED_PERCENT
 )
 
 function getTimelineHight() {
